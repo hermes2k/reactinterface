@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+## 1. npm/node 최신버전으로 설치하기
+```bash
+$>node -v
+$>npm cache clean -f
+$>npm install -g n
+$>n lts
+$>npm -v
+$>npm i -g npm
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 2. Create React App
+```bash
+$>npm uninstall -g create-react-app  # 기존에 예전버전이 설치되어있는경우, 삭제
+$>npx create-react-app reactinterface
+$>cd reactinterface
+$>npm start
+```
 
-## Available Scripts
+## 3. Modules
+- Webpack (public 아래는 webpack에서 관리한다.)
+- Babel
+- ES Lint
+- Jest
+- Web Vitals
 
-In the project directory, you can run:
+## 4. External Modules
+```
+1) React Icons 설치 (https://react-icons.github.io/react-icons/)
+$>npm install react-icons --save
+import { ICONNAME } from "react-icons/LIBNAME";
+...
+< ICONNAME />
 
-### `npm start`
+2) Tailwind CSS (https://tailwindcss.com/docs)
+// React에 설치하는법 (https://tailwindcss.com/docs/guides/create-react-app)
+$>npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+$>npm install @craco/craco
+// package.json 파일 수정
+"scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+},
+// craco.config.js 파일 생성
+module.exports = {
+    style: {
+        postcss: {
+            plugins: [
+                require('tailwindcss'),
+                require('autoprefixer'),
+            ],
+        },
+    },
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+// tailwind.config.js 파일을 아래 명령으로 생성
+$>npx tailwindcss-cli@latest init
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+// production 용으로 빌드시, purge에 기술된 파일들은 빌드에서 제외시켜서 최적화를 한다. 아래와 같이 적어주자.
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
 
-### `npm test`
+// ./src/index.css 파일을 아래로 교체
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+// src/index.js 파일에 아래 import 추가
+import './index.css';
+```
